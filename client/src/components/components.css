@@ -1,0 +1,52 @@
+a {
+  display: block;
+  text-decoration: none;
+  color: white;
+}
+
+.navbar {
+  padding: 5px 5px 5px 10vh;
+  background-color: #1a6074;
+  display: flex;
+  align-items: center;
+
+}
+
+.navbar h1 {
+  margin: 0px 30px 0px 0px;
+}
+
+.navbar .menuItems {
+  width: 70%;
+  display: flex;
+}
+
+.deckList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deckList .deck-container {
+  width: 70%;
+}
+
+.deckList .deck-container .row {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid lightgrey;
+}
+
+.deckList .row .cell {
+  padding: 0.5rem;
+  flex: 1;
+}
+
+.deckList .row #deckName {
+  flex: 3;
+  font-weight: bold;
+}
+
+.deckList .createNew {
+  margin-top: 40px;
+}
