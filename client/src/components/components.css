@@ -4,9 +4,13 @@ a {
   color: white;
 }
 
+button {
+  padding: 5px;
+}
+
 .navbar {
   padding: 5px 5px 5px 10vh;
-  background-color: #1a6074;
+  background-color: #3A6960;
   display: flex;
   align-items: center;
 
@@ -49,4 +53,65 @@ a {
 
 .deckList .createNew {
   margin-top: 40px;
+}
+
+.cardEdit {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardEdit form {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardEdit form select {
+  width: auto;
+}
+
+.cardEdit .editRow {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardEdit .editRow label {
+  width: 20%;
+  text-align: left;
+}
+
+.cardEdit input {
+  width: 100%;
+  padding: 10px 5px 10px 5px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid rgb(255,255,255, 0.2);
+  background-color: #282c34;
+  color: white;
+}
+
+.cardEdit #yesNoAnswers {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.cardEdit #yesNoAnswers label {
+  width: auto;
+  padding-right: 5px;
+}
+
+.cardEdit #yesNoAnswers input {
+  width: auto;
+  margin-right: 15px;
+}
+
+.cardEdit button {
+  margin: 20px 1px 10px 1px;
+}
+
+.cardEdit input:disabled {
+  background-color: #3c414b;
 }

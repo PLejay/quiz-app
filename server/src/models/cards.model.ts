@@ -1,11 +1,10 @@
 import { Schema, model } from 'mongoose';
 
-const CardSchema = new Schema ({
-  _id: Schema.Types.ObjectId,
+export const CardSchema = new Schema ({
   type: String,
   text: String,
+  possibleAnswers: {type: [String], default: undefined},
   correctAnswer: String,
-  decks: [{ type: Schema.Types.ObjectId, ref: 'Deck'}]
 });
 
 export const Card = model('Card', CardSchema);

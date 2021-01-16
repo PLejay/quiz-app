@@ -1,28 +1,99 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './components.css';
-import { useLocation } from 'react-router-dom';
-import { DeckType } from '../types/types';
+import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { DeckType, urlParams} from '../types/types';
 
 
-const CardEdit = () => {
-  // const {deckName}: string | undefined = useParams();
-  const location = useLocation();
-  const deck = location.state as DeckType;
+type props = {
+  getDeckFromName (deckName: string): DeckType;
+}
+
+const CardEdit = ({getDeckFromName}: props) => {
+  const params = useParams() as urlParams;
+  const {deckName, cardID} = params;
+  const isNew = cardID === 'new';
+  const { register, handleSubmit, watch, errors } = useForm();
+  const [deck, setDeck] = useState <DeckType | {}>({});
+
+  const onSubmit = (e: React.FormEvent<HTMLInputElement>) => {
+    // e.preventDefault();
+    console.log('data: ', e);
+  }
+
+  useEffect (() => {
+    let newDeck = Object.assign({}, deck);
+    newDeck = getDeckFromName(deckName);
+    setDeck(newDeck);
+  }, []);
+
+
+  let type = watch('type');
+  let isYesNo = type === 'Yes/No';
+
+  console.log('watching:', watch('type'));
+  console.log('watching:', watch('text'));
 
 
   return (
-    <div className="deck">
-      <h2>{deck.name}</h2>
-      {deck.cards.map(card =>
-        <h3>{card.text}</h3>
-      )}
-      <Link to={{ pathname: `/deck/${deck.name}/edit/new` }}>
-        <button>Create new card</button>
+    <div className="cardEdit">
+      <Link to={`/deck/${deckName}`}>
+        <h2>{deckName}</h2>
       </Link>
+      <h3>{isNew ? 'Create new card' : 'Edit card'}</h3>
+      <form onSubmit={handleSubmit(onSubmit)} id="editForm">
+        <div className="editRow">
+          <label htmlFor="type">Type:</label>
+          <select name="type" id="type" ref={register}>
+            <option value="Yes/No">Yes/No</option>
+            <option value="multipleChoice">Multiple Choice</option>
+            <option value="writeAnswer">Write Answer</option>
+          </select>
+        </div>
+        <div className="editRow">
+          <label htmlFor="text">Text</label>
+          <input type="text" name="text" ref={register}
+                  placeholder={isYesNo
+                    ? "Do you love white text on black background?"
+                    : type==="multipleChoice"
+                      ? "Which of the following are valid HTTP methods?"
+                      : "List all possible falsy values in Javascript"}/>
+        </div>
+        <div className="editRow">
+          <label>Possible answers</label>
+          <input type="text" name="possibleAnswers" ref={register}
+                  disabled={isYesNo}
+                  placeholder={isYesNo
+                    ? "Yes, No"
+                    : type === "multipleChoice"
+                      ? "GET, PUT, EDIT, DELETE"
+                      : ""}/>
+        </div>
+        <div className="editRow">
+          <label>Correct answer</label>
+          {isYesNo
+            ? (<div id="yesNoAnswers">
+                <label htmlFor="Yes">Yes</label>
+                <input type="radio" name="correctAnswer" value="Yes" ref={register} checked></input>
+                <label htmlFor="No">No</label>
+                <input type="radio" name="correctAnswer" value="No" ref={register}></input>
+              </div>)
+            : <input type="text" name="correctAnswer" ref={register}
+              placeholder={type === "multipleChoice"
+                  ? "GET, PUT, DELETE"
+                  : "0, null, undefined, false, NaN, empty string, 0n (BigInt)"} />}
+        </div>
+      </form>
+
+      <div className="actions">
+        <button type="submit" form="editForm" ref={register}>Save</button>
+        <button type="submit" form="editForm" ref={register}>Save and create another</button>
+        <button>Cancel</button>
+      </div>
     </div>
   );
-}
+};
 
 
 export default CardEdit;

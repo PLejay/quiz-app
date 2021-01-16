@@ -1,25 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './components.css';
-import {useLocation} from 'react-router-dom';
-import { DeckType } from '../types/types';
+import { useParams } from 'react-router-dom';
+import { DeckType, urlParams } from '../types/types';
 import { Link } from 'react-router-dom';
 
+type props = {
+  getDeckFromName (deckName: string): DeckType;
+}
 
-const Deck = () => {
-  // const {deckName}: string | undefined = useParams();
-  const location = useLocation();
-  const deck = location.state as DeckType;
+const Deck = ({ getDeckFromName }: props) => {
+  const params = useParams() as urlParams;
+  const { deckName } = params;
+  // const location = useLo
+  const [deck, setDeck] = useState<DeckType>({name: 'Deck loading...', cards:[]});
 
+  useEffect(() => {
+    let newDeck = Object.assign({}, deck);
+    newDeck = getDeckFromName(deckName);
+    setDeck(newDeck);
+  }, []);
+
+  const displayCards = () => {
+    return (
+      deck.cards.map(card =>
+        <h3 key={card.text}>{card.text}</h3>
+      )
+    )
+  }
 
   return (
     <div className="deck">
-      <h2>{deck.name}</h2>
-      {deck.cards.map(card =>
-        <h3>{card.text}</h3>
-      )}
-      <Link to={{pathname: `/deck/${deck.name}/edit/new`}}>
-        <button>Create new card</button>
-      </Link>
+      {deck.name
+        ? <div>
+          <h2>{deck.name}</h2>
+            {displayCards()}
+            <Link to={{ pathname: `/deck/${deck.name}/edit/new` }}>
+              <button>Create new card</button>
+            </Link>
+        </div>
+      : null}
     </div>
   );
 }

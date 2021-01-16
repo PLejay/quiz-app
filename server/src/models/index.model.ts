@@ -7,6 +7,3 @@ mongoose.connect(db, {
 });
 
 export const connection = mongoose.connection;
-connection.on('open', () => {
-  console.log('🐦 Database connected! 🐦'); //eslint-disable-line no-console
-});
