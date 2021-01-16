@@ -3,8 +3,7 @@ import './components.css';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { DeckType, urlParams} from '../types/types';
-
+import { DeckType, CardType, urlParams} from '../types/types';
 
 type props = {
   getDeckFromName (deckName: string): DeckType;
@@ -17,9 +16,14 @@ const CardEdit = ({getDeckFromName}: props) => {
   const { register, handleSubmit, watch, errors } = useForm();
   const [deck, setDeck] = useState <DeckType | {}>({});
 
-  const onSubmit = (e: React.FormEvent<HTMLInputElement>) => {
-    // e.preventDefault();
-    console.log('data: ', e);
+  const onSubmit = (data: CardType) => {
+    if (data.type === 'Yes/No') {
+      data.possibleAnswers = ['Yes', 'No'];
+    } else if (typeof(data.possibleAnswers) === 'string') {
+      data.possibleAnswers = data.possibleAnswers.split(',');
+    }
+
+    console.log('data: ', data);
   }
 
   useEffect (() => {
@@ -75,7 +79,7 @@ const CardEdit = ({getDeckFromName}: props) => {
           {isYesNo
             ? (<div id="yesNoAnswers">
                 <label htmlFor="Yes">Yes</label>
-                <input type="radio" name="correctAnswer" value="Yes" ref={register} checked></input>
+                <input type="radio" name="correctAnswer" value="Yes" ref={register} defaultChecked></input>
                 <label htmlFor="No">No</label>
                 <input type="radio" name="correctAnswer" value="No" ref={register}></input>
               </div>)

@@ -1,7 +1,7 @@
 export type CardType = {
   type: string,
   text: string,
-  possibleAnswers: string[],
+  possibleAnswers: string[] | string,
   correctAnswer: string,
 }
 
