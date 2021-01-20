@@ -1,70 +1,77 @@
 import React, { useState, useEffect } from 'react';
 import './components.css';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { DeckType, CardType, urlParams} from '../types/types';
+import { DeckType, CardType, urlParams, Props, CardSubmitType} from '../types/types';
 
-type props = {
-  getDeckFromName (deckName: string): DeckType;
-}
-
-const CardEdit = ({getDeckFromName}: props) => {
-  const params = useParams() as urlParams;
-  const {deckName, cardID} = params;
+const CardEdit = ({getDeckFromName, getCardFromID, editCard, updateDecks}: Props) => {
+  const {deckName, cardID} = useParams<urlParams>();
   const isNew = cardID === 'new';
-  const { register, handleSubmit, watch, errors } = useForm();
   const [deck, setDeck] = useState <DeckType | {}>({});
+  const [card, setCard] = useState <CardType>({
+    _id: cardID || 'new',
+    type: 'Yes/No',
+    text: '',
+    possibleAnswers: [''],
+    correctAnswer: ''
+  });
+  const { register, handleSubmit, watch, errors } = useForm();
 
-  const onSubmit = (data: CardType) => {
+  const [isSubmitted, setSubmitted] = useState <boolean>(false);
+
+  const onSubmit = async (data: CardSubmitType) => {
     if (data.type === 'Yes/No') {
       data.possibleAnswers = ['Yes', 'No'];
     } else if (typeof(data.possibleAnswers) === 'string') {
       data.possibleAnswers = data.possibleAnswers.split(',');
     }
-
-    console.log('data: ', data);
+    if (!isNew && cardID) data._id = cardID;
+    if (editCard) await editCard(data as CardType, deckName, isNew);
+    updateDecks();
+    setSubmitted(true);
   }
 
   useEffect (() => {
-    let newDeck = Object.assign({}, deck);
-    newDeck = getDeckFromName(deckName);
+    const newDeck = getDeckFromName(deckName);
     setDeck(newDeck);
+    if (cardID && newDeck && getCardFromID) {
+      const newCard = getCardFromID(newDeck as DeckType, cardID);
+      setCard(newCard);
+    }
   }, []);
 
 
   let type = watch('type');
   let isYesNo = type === 'Yes/No';
 
-  console.log('watching:', watch('type'));
-  console.log('watching:', watch('text'));
-
 
   return (
-    <div className="cardEdit">
+    <div className="card-edit">
       <Link to={`/deck/${deckName}`}>
         <h2>{deckName}</h2>
       </Link>
       <h3>{isNew ? 'Create new card' : 'Edit card'}</h3>
       <form onSubmit={handleSubmit(onSubmit)} id="editForm">
-        <div className="editRow">
+        <div className="edit-row type">
           <label htmlFor="type">Type:</label>
           <select name="type" id="type" ref={register}>
-            <option value="Yes/No">Yes/No</option>
-            <option value="multipleChoice">Multiple Choice</option>
-            <option value="writeAnswer">Write Answer</option>
+            <option value="Yes/No" selected={isNew || card.type === 'Yes/No'}>Yes/No</option>
+            <option value="multipleChoice" selected={!isNew && card.type === 'multipleChoice'}>Multiple Choice</option>
+            <option value="writeAnswer" selected={!isNew && card.type === 'writeAnswer'}>Write Answer</option>
           </select>
         </div>
-        <div className="editRow">
+        <div className="edit-row">
           <label htmlFor="text">Text</label>
           <input type="text" name="text" ref={register}
+                  defaultValue={isNew? '': card.text}
                   placeholder={isYesNo
                     ? "Do you love white text on black background?"
                     : type==="multipleChoice"
                       ? "Which of the following are valid HTTP methods?"
                       : "List all possible falsy values in Javascript"}/>
         </div>
-        <div className="editRow">
+        <div className="edit-row">
           <label>Possible answers</label>
           <input type="text" name="possibleAnswers" ref={register}
                   disabled={isYesNo}
@@ -74,7 +81,7 @@ const CardEdit = ({getDeckFromName}: props) => {
                       ? "GET, PUT, EDIT, DELETE"
                       : ""}/>
         </div>
-        <div className="editRow">
+        <div className="edit-row">
           <label>Correct answer</label>
           {isYesNo
             ? (<div id="yesNoAnswers">
@@ -90,11 +97,12 @@ const CardEdit = ({getDeckFromName}: props) => {
         </div>
       </form>
 
-      <div className="actions">
+      <div className="bottom-actions">
         <button type="submit" form="editForm" ref={register}>Save</button>
         <button type="submit" form="editForm" ref={register}>Save and create another</button>
         <button>Cancel</button>
       </div>
+      {isSubmitted ? <Redirect push to={`/deck/${deckName}`}></Redirect> : null}
     </div>
   );
 };

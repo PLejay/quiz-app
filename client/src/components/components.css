@@ -5,7 +5,51 @@ a {
 }
 
 button {
-  padding: 5px;
+  padding: 6px;
+  margin-left: 3px;
+  margin-right: 3px;
+  color: white;
+  background-color: #172421;
+  border: 1px solid rgba(255,255,255,0.5);
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+  min-width: 50px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #1e2e2a;
+  color: grey;
+}
+
+.table {
+  width: 70%;
+}
+
+.table .table-row {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid lightgrey;
+  align-items: center;;
+}
+
+.table .table-cell {
+  padding: 0.5rem;
+  flex: 1;
+}
+
+.table .first-col {
+  flex: 5;
+  font-weight: bold;
+}
+
+.bottom-actions {
+  display: flex;
+  justify-content: center;
+  margin: 40px 10px 100px 10px;
+}
+
+.bottom-actions button {
+  margin: 3px;
 }
 
 .navbar {
@@ -20,68 +64,52 @@ button {
   margin: 0px 30px 0px 0px;
 }
 
-.navbar .menuItems {
+.navbar .menu-items {
   width: 70%;
   display: flex;
 }
 
-.deckList {
+.deck-list {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.deckList .deck-container {
-  width: 70%;
-}
-
-.deckList .deck-container .row {
+.deck {
   display: flex;
-  justify-content: space-around;
-  border-bottom: 1px solid lightgrey;
+  flex-direction: column;
+  align-items: center;
 }
 
-.deckList .row .cell {
-  padding: 0.5rem;
-  flex: 1;
-}
-
-.deckList .row #deckName {
-  flex: 3;
-  font-weight: bold;
-}
-
-.deckList .createNew {
-  margin-top: 40px;
-}
-
-.cardEdit {
+.card-edit {
   display: flex;
   flex-direction: column;
 }
 
-.cardEdit form {
+.card-edit form {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
-.cardEdit form select {
+.card-edit form select {
   width: auto;
 }
 
-.cardEdit .editRow {
+.card-edit .edit-row {
   display: flex;
   flex-grow: 1;
   justify-content: center;
   align-items: center;
+  margin-bottom: 15px;
 }
 
-.cardEdit .editRow label {
+.card-edit .edit-row label {
   width: 20%;
   text-align: left;
 }
 
-.cardEdit input {
+.card-edit input {
   width: 100%;
   padding: 10px 5px 10px 5px;
   margin-top: 5px;
@@ -91,27 +119,83 @@ button {
   color: white;
 }
 
-.cardEdit #yesNoAnswers {
+.card-edit #yesNoAnswers {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
 }
 
-.cardEdit #yesNoAnswers label {
+.card-edit #yesNoAnswers label {
   width: auto;
   padding-right: 5px;
 }
 
-.cardEdit #yesNoAnswers input {
+.card-edit #yesNoAnswers input {
   width: auto;
   margin-right: 15px;
 }
 
-.cardEdit button {
-  margin: 20px 1px 10px 1px;
+.card-edit button {
+  margin: 20px 5px 10px 5px;
 }
 
-.cardEdit input:disabled {
+.card-edit input:disabled {
   background-color: #3c414b;
+}
+
+.quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quiz .top-actions {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+}
+
+.quiz .top-actions p {
+  font-size: 16px;
+}
+
+.quiz-card {
+  width: 70%;
+}
+
+.quiz-card .question-text {
+  font-size: 24px;
+  margin: 4em;
+  margin-bottom: 2em;
+  min-height: 5em;
+}
+
+.quiz-card .possible-answers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.quiz-card .bottom-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+.clicked-incorrect {
+  color: red;
+  font-weight: bold;
+  border: 3px solid red;
+  background-color: white;;
+}
+
+.clicked-correct {
+  color: green;
+  font-weight: bold;
+  border: 3px solid green;
+  background-color: white;;
 }

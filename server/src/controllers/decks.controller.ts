@@ -5,6 +5,7 @@ exports.createDeck = async (req: Request, res: Response) => {
   try {
     const deckName = req.body;
     const newDeck = await Deck.create(deckName);
+    res.status(201);
     res.send(newDeck);
   } catch (err) {
     res.status(500);
