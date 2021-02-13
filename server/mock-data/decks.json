@@ -1,0 +1,158 @@
+[{
+  "_id": {
+    "$oid": "60000a2983c28d1c1f1e9e77"
+  },
+  "cards": [
+    {
+      "_id": {
+        "$oid": "6000218a652c2d79a06fcc6b"
+      },
+      "type": "Yes/No",
+      "text": "Is this a card?",
+      "possibleAnswers": [
+        "Yes",
+        "No"
+      ],
+      "correctAnswer": "Yes"
+    },
+    {
+      "_id": {
+        "$oid": "6000218a652c2d79a06fcc6c"
+      },
+      "type": "Yes/No",
+      "text": "Is Bogotá the capital of Colombia?",
+      "possibleAnswers": [
+        "Yes",
+        "No"
+      ],
+      "correctAnswer": "Yes"
+    },
+    {
+      "_id": {
+        "$oid": "6000218a652c2d79a06fcc6d"
+      },
+      "type": "Yes/No",
+      "text": "Would you not not prefer to not answer this question incorrectly, or not?",
+      "possibleAnswers": [
+        "Yes",
+        "No"
+      ],
+      "correctAnswer": "No"
+    },
+    {
+      "_id": {
+        "$oid": "60076467340c0e4380208aa4"
+      },
+      "type": "Yes/No",
+      "text": "Is the answer to this question 'No'?",
+      "possibleAnswers": [
+        "Yes",
+        "No"
+      ],
+      "correctAnswer": "No"
+    }
+  ],
+  "name": "Default Deck",
+  "__v": 50
+},{
+  "_id": {
+    "$oid": "600077ee9e7c3d2f6fb0ac0d"
+  },
+  "name": "deck2",
+  "cards": [
+    {
+      "_id": {
+        "$oid": "6000784e9e7c3d2f6fb0ac0e"
+      },
+      "type": "yesno",
+      "text": "Is this a card?",
+      "possibleAnswers": [
+        "Yes",
+        "No"
+      ],
+      "correctAnswer": "Yes"
+    },
+    {
+      "_id": {
+        "$oid": "6000784e9e7c3d2f6fb0ac0f"
+      },
+      "type": "yesno",
+      "text": "Is Bogotá the capital of Colombia?",
+      "possibleAnswers": [
+        "Yes",
+        "No"
+      ],
+      "correctAnswer": "Yes"
+    },
+    {
+      "_id": {
+        "$oid": "6000784e9e7c3d2f6fb0ac10"
+      },
+      "type": "yesno",
+      "text": "Would you not not prefer to not answer this question incorrectly, or not?",
+      "possibleAnswers": [
+        "Yes",
+        "No"
+      ],
+      "correctAnswer": "No"
+    }
+  ],
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "60076373340c0e4380208aa2"
+  },
+  "name": "Javascript",
+  "cards": [
+    {
+      "_id": {
+        "$oid": "60076496340c0e4380208aa5"
+      },
+      "type": "multipleChoice",
+      "text": "What property of strings returns the amount of characters in the string?",
+      "possibleAnswers": [
+        "size",
+        "charCount",
+        "length"
+      ],
+      "correctAnswer": "length"
+    },
+    {
+      "_id": {
+        "$oid": "600764dd340c0e4380208aa6"
+      },
+      "type": "multipleChoice",
+      "text": "What method of strings transforms the text to uppercase? ",
+      "possibleAnswers": [
+        "toUpperCase()",
+        "upper()"
+      ],
+      "correctAnswer": "upper()"
+    },
+    {
+      "_id": {
+        "$oid": "60076531340c0e4380208aa7"
+      },
+      "type": "Yes/No",
+      "text": "In Javascript, is an empty array ([]) considered 'falsy'?",
+      "possibleAnswers": [
+        "Yes",
+        "No"
+      ],
+      "correctAnswer": "No"
+    },
+    {
+      "_id": {
+        "$oid": "600766bb340c0e4380208aa8"
+      },
+      "type": "Yes/No",
+      "text": "Is the following true? 'In Javascript, there are 7 'falsy' values that evaluate to false in conditionals: 0, 0n (BigInt), null, undefined, NaN and '' (empty string)",
+      "possibleAnswers": [
+        "Yes",
+        "No"
+      ],
+      "correctAnswer": "No"
+    }
+  ],
+  "__v": 20
+}]

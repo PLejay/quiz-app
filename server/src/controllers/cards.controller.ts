@@ -1,4 +1,3 @@
-import { Card } from '../models/cards.model';
 import { Deck } from '../models/decks.model';
 import { Request, Response } from 'express';
 import { CardType } from '../types/types';
