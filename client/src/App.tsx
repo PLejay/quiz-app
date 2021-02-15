@@ -16,12 +16,9 @@ function App() {
   const [refresh, setRefresh] = useState<boolean>(false)
 
   const updateDecks = async () => {
-    // console.log('decks before:', decks);
     let newDecks = [];
     newDecks = await ApiClient.getDecks();
-    // console.log('decks updated! newDecks:', newDecks);
     setDecks(newDecks);
-    // console.log('decks after:', decks);
     setRefresh(!refresh);
   }
 
@@ -41,9 +38,7 @@ function App() {
 
   const deleteCard = async (card: CardType, deckName: string): Promise<void> => {
     const deleteResult = await ApiClient.deleteCard(card, deckName);
-    console.log('delete card triggered', card);
     console.log('deleteResult:', deleteResult);
-
   }
 
   useEffect(() => {

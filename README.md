@@ -7,7 +7,6 @@ Easy quiz-making app
 * [Introduction](#introduction)
 * [Features, present and future](#features)
 * [Tech stack](#tech)
-* [Insights](#insights)
 * [Get started](#getstarted)
 
 <a name="introduction"></a>
@@ -24,6 +23,26 @@ Quizzie was buit by [one person](https://github.com/PLejay) over the course of o
 <a name="features"></a>
 <h2 style="font-size: 2rem; font-weight: bold; color:#3A6960">Features</h2>
 
+- Build deck of question 'cards' centered around a topic
+
+<img src="./readme-assets/screenshot-decks.png" alt="Deck View"/>
+
+
+- Each deck contains a list of cards of multiple types (yes/no, multiple choice, write your own answer)
+
+<img src="./readme-assets/screenshot-cards.png" alt="Cards View"/>
+
+- Once the deck is ready, the user can start a quiz showing the questions in random order and giving instant feedback on correct and wrong answers
+
+<img src="./readme-assets/screenshot-quiz.png" alt="Quiz View"/>
+
+
+Currently missing is the ability to share a quiz with another user. The authentication process necessary for this turned out to be too time-consuming to implement in the week allocated to this project.
+
+Other planned features:
+- Detailed stats for both the student and teacher, on individual quizzes as well as aggregated
+- An option for the student to give feedback on specific questions (easy/good/hard)
+- The addition of media (pictures/videos) to questions as visual prompts
 
 
 <a name="tech"></a>

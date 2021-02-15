@@ -7,8 +7,8 @@ import { DeckType, CardType, urlParams, Props, CardSubmitType} from '../types/ty
 
 const CardEdit = ({getDeckFromName, getCardFromID, editCard, updateDecks}: Props) => {
   const {deckName, cardID} = useParams<urlParams>();
-  const isNew = cardID === 'new';
   const [deck, setDeck] = useState <DeckType | {}>({});
+  const isNew = cardID === 'new';
   const [card, setCard] = useState <CardType>({
     _id: cardID || 'new',
     type: 'Yes/No',
@@ -16,7 +16,7 @@ const CardEdit = ({getDeckFromName, getCardFromID, editCard, updateDecks}: Props
     possibleAnswers: [''],
     correctAnswer: ''
   });
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch } = useForm();
 
   const [isSubmitted, setSubmitted] = useState <boolean>(false);
 
